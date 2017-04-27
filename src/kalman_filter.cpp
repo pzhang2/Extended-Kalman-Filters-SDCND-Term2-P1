@@ -1,5 +1,9 @@
 #include <iostream>
 #include "kalman_filter.h"
+//#include <math.h>
+
+#define PI 3.1415926535897
+
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
@@ -70,8 +74,14 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   // prediction error
   VectorXd y = z - hx; // need normalize y(1) to (-pi pi) range ?
 
-  std::cout << "!z_ = " << z(1) << "!!!" << std::endl;
-  std::cout << "!!hx_ = " << hx(1) << "!!!" << std::endl;
+  while(y[1] > PI || y[1] < - PI)
+  {
+    if(y[1] > PI)
+      y[1] -= PI;
+    else y[1] += PI;
+  }
+//  std::cout << "!z_ = " << z(1) << "!!!" << std::endl;
+//  std::cout << "!!hx_ = " << hx(1) << "!!!" << std::endl;
   std::cout << "!!!y_ = " << y(1) << "!!!" << std::endl;
 
 
