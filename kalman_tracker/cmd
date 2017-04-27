@@ -1,0 +1,2 @@
+source activate carnd-term1
+python kalman_tracker.py ../build/ExtendedKF
